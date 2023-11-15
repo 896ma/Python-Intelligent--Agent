@@ -30,6 +30,9 @@ def parsecommand():
     except Exception as exception:
         print('Sorry but I did not quite get that :)')
         
+        print(exception)
+        return 'None'
+        
         
         
         
