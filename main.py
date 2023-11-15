@@ -9,8 +9,14 @@ import wolframalpha
 
 engine=pyttsx3.init()
 voices= engine.getProperty('voices')
-engine.setProperty('voice,voices[0].id') #0 -male ,1- female
+engine.setProperty('voice,voices[1].id') #0 -male ,1- female
 activationWord ='computer' #single word
+
+def speak(text,rate =120):
+    engine.setProperty('rete',rate)
+    engine.say(text)
+    engine.runAndWait()
+    
 
 #Method to have the system listening for commands
 
@@ -25,14 +31,16 @@ def parsecommand():
         
     try:
         print('Recognizing Speech...')
-        query =listener.recognize_google(input_speech,language='en_us')
+        query =listener.recognize_google(input_speech,language='en_US')
         print(f'The input speech was:(query)')#How well was the speech recognized
     except Exception as exception:
-        print('Sorry but I did not quite get that :)')
-        
+        print('Sorry but I did not quite catch that :)')
+        speak('Sorry but I did not quite catch that')
         print(exception)
         return 'None'
-        
+    return query
+
+
         
         
         
