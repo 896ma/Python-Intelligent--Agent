@@ -40,11 +40,34 @@ def parsecommand():
         return 'None'
     return query
 
-
+#main loop
+if __name__ == '__main__':
+    speak('all systems nominal.')
+    
+    while True:
+        #parse  arguments as a list( store whatever user says as a list of different words)
+        query =parsecommand().lower().split()
+        if query[0] == activationWord:
+            query.pop(0)
         
-        
+        #list commands
+        if  query[0] == 'say':
+            if 'hello' in query:
+                speak('Greetings ,all')
+                
+            else:
+                query.pop(0) #  Remove the  say command again from your list
+                speech =''.join(query)
+                speak(speech) #  Echo from your  AI assistant 
+                
+                
+                
+                
         
         
     
-
-
+    
+        
+        
+        
+             
