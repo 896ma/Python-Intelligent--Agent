@@ -1,4 +1,4 @@
-from date import datetime
+from  datetime import datetime
 import speech_recognition  as sr   
 import pyttsx3
 import webbrowser
@@ -9,7 +9,8 @@ import wolframalpha
 
 engine=pyttsx3.init()
 voices= engine.getProperty('voices')
-engine.setProperty('voice,voices[1].id') #0 -male ,1- female
+engine.setProperty('voice', voices[0].id)
+ #0 -male ,1- female
 activationWord ='computer' #single word
 
 def speak(text,rate =120):
@@ -42,7 +43,7 @@ def parsecommand():
 
 #main loop
 if __name__ == '__main__':
-    speak('All Goat systems up and running.')
+    speak('All  systems up and running.')
     
     while True:
         #parse  arguments as a list( store whatever user says as a list of different words)
@@ -53,7 +54,7 @@ if __name__ == '__main__':
         #list commands
         if  query[0] == 'say':
             if 'hello' in query:
-                speak('Greetings comrades')
+                speak('Greetings , Solar Crash')
                 
             else:
                 query.pop(0) #  Remove the  say command again from your list
