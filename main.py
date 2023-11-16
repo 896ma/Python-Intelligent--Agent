@@ -11,10 +11,19 @@ engine=pyttsx3.init()
 voices= engine.getProperty('voices')
 engine.setProperty('voice', voices[0].id)
  #0 -male ,1- female
-activationWord ='computer' #single word
+activationWord ='Patek' #single word
 
-def speak(text,rate =120):
-    engine.setProperty('rete',rate)
+#Browser configuration
+#set the path for the web browser 
+
+chrome_path = "/usr/bin/google-chrome"
+
+webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
+
+
+
+def speak(text,rate =190):
+    engine.setProperty('rate',rate)
     engine.say(text)
     engine.runAndWait()
     
@@ -26,7 +35,7 @@ def parsecommand():
     print('Listening for  a user command :)') 
     
     with sr.Microphone() as source:
-        listener.pause_threshold  =2 # how  long can there be a gap in your speech listening before it's cut
+        listener.pause_threshold  =5 # how  long can there be a gap in your speech listening before it's cut
         input_speech =listener.listen(source)
         
         
@@ -43,7 +52,7 @@ def parsecommand():
 
 #main loop
 if __name__ == '__main__':
-    speak('All  systems up and running.')
+    speak('All  systems up and  running .')
     
     while True:
         #parse  arguments as a list( store whatever user says as a list of different words)
@@ -61,8 +70,12 @@ if __name__ == '__main__':
                 speech =''.join(query)
                 speak(speech) #  Echo from your  AI assistant 
                 
+                #Navigation
                 
-                
+            if query[0]== 'go' and query[1]== 'to':
+                speak('opening...')
+                query = ''.join(query{2:})
+                webbrowser.get('chrome').open_new(query)
                 
         
         
