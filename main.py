@@ -42,7 +42,7 @@ def parsecommand():
 
 #main loop
 if __name__ == '__main__':
-    speak('all systems nominal.')
+    speak('All Goat systems up and running.')
     
     while True:
         #parse  arguments as a list( store whatever user says as a list of different words)
@@ -53,7 +53,7 @@ if __name__ == '__main__':
         #list commands
         if  query[0] == 'say':
             if 'hello' in query:
-                speak('Greetings ,all')
+                speak('Greetings comrades')
                 
             else:
                 query.pop(0) #  Remove the  say command again from your list
