@@ -4,7 +4,7 @@ import pyttsx3
 import webbrowser
 import wikipedia
 import wolframalpha
-
+import math
 #speech engine initialisation
 
 engine=pyttsx3.init()
@@ -74,7 +74,7 @@ if __name__ == '__main__':
                 
             if query[0]== 'go' and query[1]== 'to':
                 speak('opening...')
-                query = ''.join(query{2:})
+                query = ''.join(query[2:])
                 webbrowser.get('chrome').open_new(query)
                 
         
