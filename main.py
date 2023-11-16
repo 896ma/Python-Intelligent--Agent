@@ -5,6 +5,7 @@ import webbrowser
 import wikipedia
 import wolframalpha
 import math
+import  time
 #speech engine initialisation
 
 engine=pyttsx3.init()
@@ -16,11 +17,45 @@ activationWord ='Patek' #single word
 #Browser configuration
 #set the path for the web browser 
 
+
+# Mute ALSA errors...
+from ctypes import *
+from contextlib import contextmanager
+
+ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)
+
+def py_error_handler(filename, line, function, err, fmt):
+    pass
+
+c_error_handler = ERROR_HANDLER_FUNC(py_error_handler)
+
+@contextmanager
+def noalsaerr():
+    try: 
+        asound = cdll.LoadLibrary('libasound.so')
+        asound.snd_lib_error_set_handler(c_error_handler)
+        yield
+        asound.snd_lib_error_set_handler(None)
+    except:
+        yield
+        print('')
 chrome_path = "/usr/bin/google-chrome"
 
 webbrowser.register('chrome', None, webbrowser.BackgroundBrowser(chrome_path))
 
 
+
+def search_wikipedia(keyword=''):
+    searchResults = wikipedia.search(keyword)
+    if not searchResults:
+        return 'No result received'
+    try: 
+        wikiPage = wikipedia.page(searchResults[0]) 
+    except wikipedia.DisambiguationError as error:
+        wikiPage = wikipedia.page(error.options[0])
+    print(wikiPage.title)
+    wikiSummary = str(wikiPage.summary)
+    return wikiSummary
 
 def speak(text,rate =190):
     engine.setProperty('rate',rate)
@@ -77,6 +112,12 @@ if __name__ == '__main__':
                 query = ''.join(query[2:])
                 webbrowser.get('chrome').open_new(query)
                 
+             # Wikipedia
+            if query[0] == 'wikipedia':
+                query = ' '.join(query[1:])
+                speak('Querying the universal databank')
+                time.sleep(2)
+                speak(search_wikipedia(query))
         
         
     
