@@ -73,16 +73,17 @@ def google_text_to_wav(voice_name: str, text: str):
 
 # Configure browser
 # Set the path
-firefox_path = "usr/bin/firefox"
+chrome_path = "C:\Program Files\Google\Chrome\Application"
+
 # Register the browser
-webbrowser.register('firefox', None, 
-                    webbrowser.BackgroundBrowser(firefox_path))
+webbrowser.register('chrome', None, 
+                    webbrowser.BackgroundBrowser(chrome_path))
 
 # Wolfram Alpha client
 appId = '5R49J7-J888YX9J2V'
 wolframClient = wolframalpha.Client(appId)
 
-def speak(text, rate = 120):
+def speak(text, rate = 122):
     time.sleep(0.3)
     try:     
         if tts_type == 'local':
@@ -210,7 +211,7 @@ if __name__ == '__main__':
             # Set commands
             if query[0] == 'say':
                 if 'hello' in query:
-                    speak('Greetings, all!')
+                    speak('Greetings  master!')
                 else:
                     query.pop(0) # Remove 'say'
                     speech = ' '.join(query) 
